@@ -17,9 +17,6 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {   
         $user = Auth::user();
-        if (!$user || !$user->is_admin) {
-            abort(403, 'Nincs jogosultságod az oldal megtekintéséhez.');
-        }
         return $next($request);
     }
 }
