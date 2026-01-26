@@ -244,36 +244,6 @@ Route::delete('users/{user}', [UserController::class, 'destroy'])
 - "HOZZÁFÉRÉS MEGTAGADVA. CSAK ADMINOK SZÁMÁRA ELÉRHETŐ." üzenet
 - A felhasználó nem éri el a szerkesztő oldalt
 
-## Admin Jogosultság Beállítása
-
-### Új Admin Létrehozása
-
-```php
-$user = User::find(13); // Patrik
-$user->is_admin = true;
-$user->save();
-```
-
-### SQL-el
-
-```sql
-UPDATE users 
-SET is_admin = 1 
-WHERE email = 'valami@gmail.com';
-```
-
-### Seeder-ben
-
-```php
-// database/seeders/UserSeeder.php
-User::create([
-    'name' => 'Admin',
-    'email' => 'admin@events.hu',
-    'password' => Hash::make('password'),
-    'is_admin' => true, // Admin jogosultság
-]);
-```
-
 ## Összefoglalás
 
 - **Admin felhasználók**: Teljes jogosultság, látnak minden gombot
