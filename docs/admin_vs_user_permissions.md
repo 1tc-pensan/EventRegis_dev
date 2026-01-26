@@ -61,6 +61,8 @@ Sima felhasználók csak olvasási jogosultsággal rendelkeznek:
 
 ### 1. Route Szintű Védelem
 
+#### Web Route-ok (web.php)
+
 ```php
 // web.php
 
@@ -81,6 +83,16 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // ... ugyanez users-re is
 });
 ```
+
+#### API Route-ok (api.php)
+
+![API Route-ok - Sanctum autentikációval](screenshots/api_routes.png)
+
+Az API route-ok Sanctum autentikációt használnak és külön jogosultság kezelést implementálnak:
+
+- **Event CRUD**: Események lekérése, szűrés, létrehozás (admin), módosítás (admin), törlés (admin)
+- **Registration**: Regisztráció eseményekre, leiratkozás, admin eltávolítás
+- **User CRUD**: Felhasználók kezelése API-n keresztül
 
 ### 2. View Szintű Védelem
 
