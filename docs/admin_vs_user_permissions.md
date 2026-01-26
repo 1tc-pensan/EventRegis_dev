@@ -237,6 +237,13 @@ Route::delete('users/{user}', [UserController::class, 'destroy'])
 5. Próbálj közvetlenül URL-t hívni: `http://localhost/admin/users/1/edit`
 6. ✅ 403 Forbidden hibát kell kapnod
 
+![403 Forbidden - Hozzáférés megtagadva](screenshots/403.png)
+
+**A middleware blokkolja a nem jogosult hozzáférést:**
+- 403 HTTP státusz kód
+- "HOZZÁFÉRÉS MEGTAGADVA. CSAK ADMINOK SZÁMÁRA ELÉRHETŐ." üzenet
+- A felhasználó nem éri el a szerkesztő oldalt
+
 ## Admin Jogosultság Beállítása
 
 ### Új Admin Létrehozása
