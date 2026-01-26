@@ -5,15 +5,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\UserController;
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function() {
+// Események és felhasználók megtekintése mindenki számára
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function() {
     Route::get('events', [EventController::class, 'index'])->name('events.index');
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+});
+
+// Események és felhasználók kezelése csak adminoknak
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function() {
     Route::get('events/create', [EventController::class, 'create'])->name('events.create');
     Route::post('events', [EventController::class, 'store'])->name('events.store');
     Route::get('events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('users', [UserController::class, 'store'])->name('users.store');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');

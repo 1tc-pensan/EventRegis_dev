@@ -16,15 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     
-                    @if(auth()->user()->is_admin)
-                        <x-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.*')">
-                            Események
-                        </x-nav-link>
-                        
-                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
-                            Felhasználók
-                        </x-nav-link>
-                    @endif
+                    <x-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.*')">
+                        Események
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                        Felhasználók
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -81,15 +79,13 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             
-            @if(auth()->user()->is_admin)
-                <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.*')">
-                    Események
-                </x-responsive-nav-link>
-                
-                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
-                    Felhasználók
-                </x-responsive-nav-link>
-            @endif
+            <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.*')">
+                Események
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                Felhasználók
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
