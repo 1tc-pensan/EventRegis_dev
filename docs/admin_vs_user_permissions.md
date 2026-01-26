@@ -267,30 +267,6 @@ User::create([
 ]);
 ```
 
-## Gyakori Kérdések
-
-### Miért látom a menüpontokat, ha nem vagyok admin?
-
-**Válasz:** Ez szándékos dizájn döntés! Így a felhasználók látják, mi elérhető az alkalmazásban, csak nem tudnak módosítani. Ez jobb UX élményt nyújt.
-
-### Mi történik, ha sima felhasználóként próbálok URL-t közvetlenül meghívni?
-
-**Válasz:** A `AdminMiddleware` elkapja a kérést és `403 Forbidden` hibát dob.
-
-### Lehet-e finomabb jogosultság kezelést csinálni?
-
-**Válasz:** Igen! Használhatsz:
-- **Laravel Policies**: Erőforrás-specifikus jogosultságok
-- **Laravel Gates**: Általános jogosultság ellenőrzések
-- **Spatie Permission**: Szerepkör és jogosultság csomag
-
-### Biztonságos-e ez a megoldás?
-
-**Válasz:** Igen, ha mindhárom védelmi szintet alkalmazod:
-1. ✅ Route middleware
-2. ✅ View feltételek
-3. ✅ (Opcionális) Controller szintű ellenőrzés
-
 ## Összefoglalás
 
 - **Admin felhasználók**: Teljes jogosultság, látnak minden gombot
