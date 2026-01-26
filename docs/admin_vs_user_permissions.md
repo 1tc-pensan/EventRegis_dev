@@ -49,7 +49,9 @@ Sima felhasználók csak olvasási jogosultsággal rendelkeznek:
 
 #### Nézet Sima Felhasználó Számára:
 
-![Felhasználók - Sima felhasználó nézet](screenshots/user_users_view.png)
+<body>
+<img src="screenshots/Képernyőkép 2026-01-26 081339.png">
+</body>
 
 **Sima felhasználó nézetben:**
 - ❌ NINCS "Új felhasználó" gomb
