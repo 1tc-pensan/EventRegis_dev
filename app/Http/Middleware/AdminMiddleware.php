@@ -17,6 +17,12 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {   
         $user = Auth::user();
+        
+        // Ellenőrizzük, hogy a felhasználó be van-e jelentkezve és admin-e
+        if (!$user || !$user->is_admin) {
+            abort(403, 'Hozzáférés megtagadva. Csak adminok számára elérhető.');
+        }
+        
         return $next($request);
     }
 }
