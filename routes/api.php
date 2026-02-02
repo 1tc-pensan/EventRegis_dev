@@ -6,12 +6,32 @@ use \App\Http\Controllers\Api\AuthController;
 use \App\Http\Controllers\Api\UserController;
 use \App\Http\Controllers\Api\EventController;
 use \App\Http\Controllers\Api\RegistrationController;
+use Illuminate\Support\Facades\URL;
+use App\Models\User;
 
 
 //Without authentication
 Route::get('/ping', function () {return response()->json(['message'=>'API működik']);});
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
+
+Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
+    $user = User::findOrFail($id);
+
+    if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+        return response()->json(['message' => 'Invalid verification link.'], 403);
+    }
+
+    if ($user->hasVerifiedEmail()) {
+        return response()->json(['message' => 'Email already verified.'], 200);
+    }
+
+    if ($user->markEmailAsVerified()) {
+        event(new \Illuminate\Auth\Events\Verified($user));
+    }
+
+    return response()->json(['message' => 'Email verified successfully. You can now log in.'], 200);
+})->middleware(['signed'])->name('verification.verify');
 
 //Autheticated routes
 Route::middleware('auth:sanctum')->group(function(){

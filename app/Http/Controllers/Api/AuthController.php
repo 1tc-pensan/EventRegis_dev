@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -31,6 +32,8 @@ class AuthController extends Controller
 
         $user = User::create($validated);
 
+        event(new Registered($user));
+
         return response()->json([
             'message' => 'User created successfully',
             'user'=> [
@@ -53,6 +56,10 @@ class AuthController extends Controller
 
         if(!$user || !Hash::check($request->password, $user->password)){
             return response()->json(['message' =>'Invalid email or password'], 401);
+        }
+
+        if (!$user->hasVerifiedEmail()) {
+            return response()->json(['message' => 'Email not verified. Please verify your email before logging in.'], 403);
         }
 
         $token=$user->createToken('api-token')->plainTextToken;
